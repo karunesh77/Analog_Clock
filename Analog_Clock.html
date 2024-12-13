@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            background: rgb(36, 32, 32);
+        }
+
+        .clock {
+            position: relative;
+            width: 250px;
+            height: 250px;
+        }
+
+        .circle {
+            height: 100%;
+            width: 100%;
+            border: 2px solid rgba(225, 255, 0, 0.95);
+            border-radius: 50%;
+            box-shadow: 0 0 5px aqua, 0 0 10px aqua, 0 0 15px aqua;
+        }
+
+        .number {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            top: 66%;
+            left: 68%;
+            font-size: 20px;
+            color: #16eb4f;
+            font-weight: bold;
+            transform: translate(-50%,-50%) rotate(var(--angle)) translateY(-110px) rotate(calc(-1 * var(--angle)));
+            
+        }
+        .hand{
+            position: absolute;
+            left: 50%;
+            bottom: 49%;
+            transform-origin: bottom;
+        }
+        .hour-hand{
+            width: 5px;
+            height: 31%;
+            background: white;
+            border-radius: 50px;
+            z-index: 3;
+        }
+        .min-hand{
+            width: 5px;
+            height:40%;
+            background:#34495e;
+            border-radius: 50px;
+            z-index: 2;
+        }
+        .sec-hand{
+            width: 5px;
+            height: 49%;
+            background:linear-gradient(45deg, #F88EBD, #5B6FE5) ;
+            border-radius: 50px;
+            z-index: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="clock">
+        <div class="circle">
+            <div class="number" style="--angle: 0deg">12</div>
+            <div class="number" style="--angle: 30deg">1</div>
+            <div class="number" style="--angle: 60deg">2</div>
+            <div class="number" style="--angle: 90deg">3</div>
+            <div class="number" style="--angle: 120deg">4</div>
+            <div class="number" style="--angle: 150deg">5</div>
+            <div class="number" style="--angle: 180deg">6</div>
+            <div class="number" style="--angle: 210deg">7</div>
+            <div class="number" style="--angle: 240deg">8</div>
+            <div class="number" style="--angle: 270deg">9</div>
+            <div class="number" style="--angle: 300deg">10</div>
+            <div class="number" style="--angle: 330deg">11</div>
+        </div>
+        <div class="hour-hand hand"></div>
+        <div class="min-hand hand"></div>
+        <div class="sec-hand hand"></div>
+    </div>
+
+
+
+
+
+    <script>
+
+        setInterval(()=>{
+            let date = new Date();
+            let htimes = date.getHours();
+            let mtimes = date.getMinutes();
+            let stimes = date.getSeconds();
+            
+
+            let hrotation= 30 * htimes + mtimes/2;
+            let mrotation= 6 * mtimes;
+            let srotation= 6 * stimes;
+
+            document.querySelector(".hour-hand").style.transform = `rotate(${hrotation}deg)`
+            document.querySelector(".min-hand").style.transform = `rotate(${mrotation}deg)`
+            document.querySelector(".sec-hand").style.transform = `rotate(${srotation}deg)`
+
+        })
+
+    </script>
+
+</body>
+
+</html>
